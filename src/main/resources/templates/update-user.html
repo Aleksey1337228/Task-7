@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Update User</title>
+</head>
+<body>
+<h1>Update User</h1>
+<form action="#" th:action="@{/admin/update/{id}(id=${user.id})}" th:object="${user}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" th:field="*{name}" id="name" /><br/>
+
+    <label for="lastName">Last Name:</label>
+    <input type="text" th:field="*{lastName}" id="lastName" /><br/>
+
+    <label for="age">Age:</label>
+    <input type="number" th:field="*{age}" id="age" /><br/>
+
+    <label>Roles:</label>
+    <div th:each="role : ${roles}">
+        <input type="checkbox" th:value="${role.id}" th:name="'roleIds'"
+               th:checked="${user.roles.contains(role)}" />
+        <label th:text="${role.roleName}"></label><br/>
+    </div>
+
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>
